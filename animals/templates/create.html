@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+
+        <form method="post" style="border: 1px solid grey; margin:5% 0%; padding: 10% 10%;">
+
+            {% csrf_token %}
+                {{form}}
+
+            <button type="submit" class="btn btn-primary" style="margin-top:5%">Submit</button>
+
+        </form>
+            </div>
+    <div class="col-lg-4"></div>
+</div>
+
+</form>
+</body>
+</html>

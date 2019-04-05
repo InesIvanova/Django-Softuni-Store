@@ -1,7 +1,10 @@
 from django.core import serializers
 from django.http import HttpResponse
 from .models import Animal
+from django.views.generic import  ListView
 from collections.abc import Iterable
+from django.shortcuts import render
+from .forms import AnimalForm
 # Create your views here.
 
 
@@ -23,7 +26,7 @@ def read_animals_data(request, animal_id=None):
     if animal_id:
         return get_animal(request, animal_id)
     animals = Animal.objects.all()
-    return HttpResponse(serialize_data(animals))
+    return render(request, 'list.html', {'animals': animals})
 
 
 def create_animal(request):
@@ -102,3 +105,24 @@ def search(request):
 def owner_animals(request, owner_id):
     animals = Animal.objects.filter(owner=owner_id)
     return HttpResponse(serialize_data(animals))
+
+
+def create_animal_form(request):
+
+    if request.method == 'POST':
+        form = AnimalForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+        else:
+            for field in form.errors:
+                form[field].field.widget.attrs['class'] += ' alert alert-danger'
+            return render(request, 'create.html', {'form': form})
+    else:
+        form = AnimalForm()
+
+    return render(request, 'create.html', {'form': form})
+
+
+class AnimalList(ListView):
+    model = Animal
