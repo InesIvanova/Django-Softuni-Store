@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    <h1>Are you sure you want to delete {{animal.name}}</h1>
+    <div class="row">
+        <div class="col-lg-6">
+            <img src="{{animal.image_url}}" style="width:100%;"></img>
+        </div>
+        <div class="col-lg-6">
+                <input type="submit" class="btn btn-danger" value="Confirm">
+                <a class="btn btn-primary" href="{% url 'animals:all' %}">All animals</a>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

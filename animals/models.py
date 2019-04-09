@@ -25,6 +25,7 @@ class Animal(models.Model):
     kind = models.CharField(max_length=1, choices=KIND_CHOICES)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=True, blank=True)
 
+
     def __str__(self):
         return f"{self.name}, kind {self.kind}"
 

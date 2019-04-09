@@ -1,7 +1,7 @@
 from django.core import serializers
 from django.http import HttpResponse
 from .models import Animal
-from django.views.generic import  ListView
+from django.views.generic import  ListView, DetailView, UpdateView, DeleteView, CreateView
 from collections.abc import Iterable
 from django.shortcuts import render
 from .forms import AnimalForm
@@ -114,6 +114,8 @@ def create_animal_form(request):
 
         if form.is_valid():
             form.save()
+            animals = Animal.objects.all()
+            return render(request, 'list.html', {'animals': animals})
         else:
             for field in form.errors:
                 form[field].field.widget.attrs['class'] += ' alert alert-danger'
@@ -126,3 +128,30 @@ def create_animal_form(request):
 
 class AnimalList(ListView):
     model = Animal
+
+
+class AnimalCreate(CreateView):
+    model = Animal
+    form_class = AnimalForm
+    template_name = 'create.html'
+    success_url = '/animals/all/'
+
+class AnimalDetail(DetailView):
+    model = Animal
+    template_name = 'animal_detail.html'
+
+
+
+
+class AnimalUpdate(UpdateView):
+    model = Animal
+    template_name = 'create.html'
+    form_class = AnimalForm
+    success_url = '/animals/all/'
+
+
+class DeleteANimal(DeleteView):
+    model = Animal
+    template_name = 'animal_delete.html'
+    success_url = '/animals/all/'
+
