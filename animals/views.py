@@ -6,7 +6,7 @@ from collections.abc import Iterable
 from django.shortcuts import render
 from .forms import AnimalForm
 # Create your views here.
-
+import pdb;
 
 def serialize_data(queryset):
     if isinstance(queryset, Iterable):
@@ -108,7 +108,7 @@ def owner_animals(request, owner_id):
 
 
 def create_animal_form(request):
-
+    pdb.set_trace()
     if request.method == 'POST':
         form = AnimalForm(request.POST)
 
@@ -136,11 +136,10 @@ class AnimalCreate(CreateView):
     template_name = 'create.html'
     success_url = '/animals/all/'
 
+
 class AnimalDetail(DetailView):
     model = Animal
     template_name = 'animal_detail.html'
-
-
 
 
 class AnimalUpdate(UpdateView):
